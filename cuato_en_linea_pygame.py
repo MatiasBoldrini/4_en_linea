@@ -80,21 +80,15 @@ class Game:
                         if self.board.player1.strip() in self.board.board[y][x]
                         else Color.player2
                     )
-                    pygame.draw.circle(
-                        self.screen,
-                        color,
-                        (token_size * (x + 0.5), token_size * (y + 0.5) + token_size),
-                        17,
-                        0,
-                    )
                 else:
-                    pygame.draw.circle(
-                        self.screen,
-                        Color.black,
-                        (token_size * (x + 0.5), token_size * (y + 0.5) + token_size),
-                        17,
-                        0,
-                    )
+                    color = Color.black
+                pygame.draw.circle(
+                    self.screen,
+                    color,
+                    (token_size * (x + 0.5), token_size * (y + 0.5) + token_size),
+                    17,
+                    0,
+                )
 
     def draw_text(self, text):
         font1 = pygame.font.SysFont("Jetbrains Mono", 25)

@@ -31,10 +31,10 @@ class Board:
         return len(list([i for i in column_list if i != "   "]))
 
     def insert_token(self, column):
-        if isinstance(column, str):
-            if column.isdigit():
-                column = int(column)
-        if not (isinstance(column, int)) or not (0 <= column < 8):
+        try:
+            column = int(column)
+            assert(0 <= column < 8)
+        except (ValueError, AssertionError):
             raise WrongInputException()
 
         if not any("   " in row for row in self.board):
