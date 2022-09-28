@@ -1,1 +1,2 @@
-coverage==5.5
+coverage==6.4.4
+pygame==2.1.2
