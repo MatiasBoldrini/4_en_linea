@@ -13,7 +13,6 @@ class Test_logic(unittest.TestCase):
                 self.board.insert_token(i)
 
     def test_winner_vertical(self):
-
         with self.assertRaises(PlayerWonException):
             for i in [0, 1, 0, 1, 0, 1, 0]:
                 self.board.insert_token(i)
