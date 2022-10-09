@@ -21,22 +21,22 @@ class Board:
     def __init__(self):
         self.player1 = "🔴 "
         self.player2 = "🔵 "
-        self.board = [["   " for i in range(8)] for j in range(8)]
+        self.board = [["   " for _ in range(8)] for _ in range(8)]
         self.turn = True  # This var will be True if its player 1 turn.
 
     def available_spaces(self, column): 
         # get the amount of spaces available
         column_list = self.column_to_list(column)
-        return len(list([i for i in column_list if i != "   "]))
+        return len([i for i in column_list if i != "   "])
 
     def insert_token(self, column):
         try:
             column = int(column)
             assert(0 <= column < 8)
-        except (ValueError, AssertionError):
-            raise WrongInputException()
+        except (ValueError, AssertionError) as e:
+            raise WrongInputException() from e
 
-        if not any("   " in row for row in self.board):
+        if all("   " not in row for row in self.board):
             raise NoSpacesAvailableException()
         amount_of_spaces_used = self.available_spaces(column)
         if amount_of_spaces_used > 7:
@@ -63,28 +63,20 @@ class Board:
         # range delimiter to avoid IndexError on generator
         start_limit = max(0, min(row, column) - 3)
         end_limit = min(8 - increment, min(row, column) + 4)
-        diagonal = [
-            (self.board[i + row_increment][i + col_increment])
-            for i in range(start_limit, end_limit)
-        ]
-        return diagonal
+        return [(self.board[i + row_increment][i + col_increment]) for i in range(start_limit, end_limit)]
 
     def NE_diagonal_to_list(self, row, column):  # ↗ NE Diagonal
         increment = abs(7 - (row + column))
         diagonal = []
         if row + column > 7:
-            diagonal = [(self.board[7 - i + increment][i]) for i in range(increment, 8)]
+            return [(self.board[7 - i + increment][i]) for i in range(increment, 8)]
         else:
-            diagonal = [
-                (self.board[i][7 - i - increment]) for i in range(0, 8 - increment)
-            ]
-
-        return diagonal
+            return [self.board[i][7 - i - increment] for i in range(8 - increment)]
 
     def check_list(self, list):
         # This is checking if the player has won.
         skin = self.player1 if self.turn else self.player2
-        str_to_check = "".join(i for i in list)
+        str_to_check = "".join(list)
         if skin * 4 in str_to_check:
             raise PlayerWonException("Player 1" if self.turn else "Player 2")
     
