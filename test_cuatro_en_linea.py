@@ -96,7 +96,7 @@ class Test_logic(unittest.TestCase):
     def test_overflow(self):
 
         with self.assertRaises(SpaceException):
-            for i in range(9):
+            for _ in range(9):
                 self.board.insert_token(0)
 
     def test_input_incorrect(self):
