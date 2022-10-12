@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-from parameterized import parameterized
 
 
 class Test_frontend(unittest.TestCase):
