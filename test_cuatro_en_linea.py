@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from .cuatro_en_linea import *
+from cuatro_en_linea import *
 
 
 class Test_logic(unittest.TestCase):
