@@ -6,10 +6,40 @@ from cuatro_en_linea import *
 class Test_logic(unittest.TestCase):
     def setUp(self):
         self.board = Board()
-
+        
+    def test_board(self):
+        board_str = (
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'
+            '|    |    |    |    |    |    |    |    |\n'
+            '+----+----+----+----+----+----+----+----+\n'           
+        )
+        print(self.board)
+        print(board_str)
+        self.assertEqual(str(self.board), board_str)
+        
+    def test_player_won(self):
+        try:
+            for i in [0, 0, 1, 1, 2, 2, 3, 3, 4, 0]:
+                self.board.insert_token(i)
+        except PlayerWonException as e:
+            self.assertEqual(str(e),'Player 1')
     def test_winner_horizontal(self):
         with self.assertRaises(PlayerWonException):
-            for i in [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]:
+            for i in [0, 0, 1, 1, 2, 2, 3, 3, 4, 0]:
                 self.board.insert_token(i)
 
     def test_winner_vertical(self):
@@ -124,7 +154,6 @@ class Test_logic(unittest.TestCase):
             self.board.get_row(7),
             ["🔴 ", "   ", "   ", "   ", "   ", "   ", "   ", "   "],
         )
-
 
 if __name__ == "__main__":
     unittest.main()
