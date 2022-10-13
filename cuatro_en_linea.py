@@ -53,6 +53,15 @@ class Board:
         return [row[column] for row in self.board]
 
     def SE_diagonal_to_list(self, row, column):  # ↘ SE Diagonal
+        """
+        It returns a list of the values of the squares in the SE diagonal of the board, starting from the
+        square at the intersection of the row and column passed to the function, and going up to 4
+        squares in either direction
+        
+        :param row: the row of the piece
+        :param column: the column of the piece
+        :return: A list of the values of the squares in the diagonal.
+        """
         # deviation from main diagonal
         increment = abs(row - column)
         row_increment = increment if row > column else 0
@@ -63,6 +72,7 @@ class Board:
         return [(self.board[i + row_increment][i + col_increment]) for i in range(start_limit, end_limit)]
 
     def NE_diagonal_to_list(self, row, column):  # ↗ NE Diagonal
+        # Checking the diagonal from the bottom left to the top right.
         increment = abs(7 - (row + column))
         diagonal = []
         if row + column > 7:
@@ -78,6 +88,7 @@ class Board:
             raise PlayerWonException("Player 1" if self.turn else "Player 2")
     
     def __str__(self):
+        # user friendly sudoku board
         final_string = '+----'*8 + '+' + '\n'
         for i in self.board:
             for i in i:
