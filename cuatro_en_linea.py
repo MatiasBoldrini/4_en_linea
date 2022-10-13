@@ -81,7 +81,11 @@ class Board:
             return [self.board[i][7 - i - increment] for i in range(8 - increment)]
 
     def check_list(self, list):
-        # This is checking if the player has won.
+        """
+        It checks if the player has won
+        
+        :param list: The list to check for a win
+        """
         skin = self.player1 if self.turn else self.player2
         str_to_check = "".join(list)
         if skin * 4 in str_to_check:
