@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+
 from cuatro_en_linea import *
 
 
@@ -27,8 +28,6 @@ class Test_logic(unittest.TestCase):
             '|    |    |    |    |    |    |    |    |\n'
             '+----+----+----+----+----+----+----+----+\n'           
         )
-        print(self.board)
-        print(board_str)
         self.assertEqual(str(self.board), board_str)
         
     def test_player_won(self):
