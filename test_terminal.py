@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch
 
 
-
 class Test_frontend(unittest.TestCase):
     def setUp(self):
         # TODO importar el modulo frontend

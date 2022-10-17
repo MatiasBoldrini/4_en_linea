@@ -1,5 +1,6 @@
 from cuatro_en_linea import *
 
+
 class Terminal_game():
     def __init__(self): 
         self.board = Board()
