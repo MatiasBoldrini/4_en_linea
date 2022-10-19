@@ -32,6 +32,7 @@ class Board:
     def available_spaces(self, column):
         # get the amount of spaces available
         column_list = self.column_to_list(column)
+        #return len([i for i in column_list if not i.isspace()])
         return len([i for i in column_list if i != "   "])
 
     def insert_token(self, column):
@@ -40,8 +41,8 @@ class Board:
             assert 0 <= column < 8
         except (ValueError, AssertionError) as e:
             raise WrongInputException() from e
-
-        if all("   " not in row for row in self.board):
+        amount_of_h_spaces = [row.count(self.player1)+row.count(self.player2) for row in self.board]
+        if all([i == 8 for i  in amount_of_h_spaces]):
             raise NoSpacesAvailableException()
         amount_of_spaces_used = self.available_spaces(column)
         if amount_of_spaces_used > 7:

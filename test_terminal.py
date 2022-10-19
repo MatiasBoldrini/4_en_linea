@@ -12,13 +12,39 @@ class Test_frontend(unittest.TestCase):
         self.game = Terminal_game()
 
     @patch("builtins.input", side_effect=["0", "0", "1", "1", "2", "2", "3", "exit"])
-    def test_win(self, mock_inputs):
+    def test_win_p1(self, mock_inputs):
         with patch('sys.stdout', new=io.StringIO()) as fake_stdout:
             self.game.play()
         print_output = fake_stdout.getvalue().split('\n')
         print_statements = [i for i in print_output
                             if not any(j in i for j in ['|', '+']) and i]
         self.assertEqual(print_statements[0], 'Player 1 Has Won!!')
+
+    @patch("builtins.input", side_effect=["0", "0", "1", "1", "2", "2", "0", "3", "0", "3", "exit"])
+    def test_win_p2(self, mock_inputs):
+        with patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+            self.game.play()
+        print_output = fake_stdout.getvalue().split('\n')
+        print_statements = [i for i in print_output
+                            if not any(j in i for j in ['|', '+']) and i]
+        self.assertEqual(print_statements[0], 'Player 2 Has Won!!')
+
+    @patch("builtins.input", side_effect=[
+        "0", "1", "2", "3", "4", "5", "6", "7",
+        "7", "6", "5", "4", "3", "2", "1", "0",
+        "7", "6", "5", "4", "3", "2", "1", "0",
+        "0", "1", "2", "3", "4", "5", "6", "7",
+        "0", "1", "2", "3", "4", "5", "6", "7",
+        "7", "6", "5", "4", "3", "2", "1", "0",
+        "0", "1", "2", "3", "4", "5", "6", "7",
+        "0", "1", "2", "3", "4", "5", "6", "7", "7","exit"])
+    def test_tie(self,mock_inputs):
+        with patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+            self.game.play()
+        print_output = fake_stdout.getvalue().split('\n')
+        print_statements = [i for i in print_output
+                            if not any(j in i for j in ['|', '+']) and i]
+        self.assertEqual(print_statements[0], 'Tie. Game Over')
 
     @patch("builtins.input", side_effect=["0", "0", "0", "0", "0", "0", "0", "0", "0", "exit"])
     def test_out_of_space(self, mock_inputs):
@@ -47,30 +73,33 @@ class Test_frontend(unittest.TestCase):
                             if not any(j in i for j in ['|', '+']) and i]
         self.assertTrue(
             all(i == 'Wrong Input. try again' for i in print_statements))
-    @patch("builtins.input", side_effect=["0", "0", "0", "0", "0", "0", "0", "1","1","1","1","1","1","1","1","0", "exit"])
+
+    @patch("builtins.input", side_effect=["0", "0", "0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "0", "exit"])
     def test_board(self, mock_inputs):
         with patch('sys.stdout', new=io.StringIO()) as fake_stdout:
             self.game.play()
         board_str = (
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-        "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
-        "+----+----+----+----+----+----+----+----+\n"
-                     )
-        
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔵 | 🔴 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+            "| 🔴 | 🔵 |    |    |    |    |    |    |\n"
+            "+----+----+----+----+----+----+----+----+\n"
+        )
+
         self.assertIn(board_str, fake_stdout.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main()
