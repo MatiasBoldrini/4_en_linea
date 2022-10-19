@@ -5,14 +5,22 @@ class PlayerWonException(Exception):
     def __str__(self):
         return self.name
 
+
 class WrongInputException(Exception):
     pass
+
+
+class ExitException(Exception):
+    pass
+
 
 class NoSpacesAvailableException(Exception):
     pass
 
+
 class SpaceException(Exception):
     pass
+
 
 class Board:
     def __init__(self):
@@ -21,7 +29,7 @@ class Board:
         self.board = [["   " for _ in range(8)] for _ in range(8)]
         self.turn = True  # This var will be True if its player 1 turn.
 
-    def available_spaces(self, column): 
+    def available_spaces(self, column):
         # get the amount of spaces available
         column_list = self.column_to_list(column)
         return len([i for i in column_list if i != "   "])
@@ -29,7 +37,7 @@ class Board:
     def insert_token(self, column):
         try:
             column = int(column)
-            assert(0 <= column < 8)
+            assert 0 <= column < 8
         except (ValueError, AssertionError) as e:
             raise WrongInputException() from e
 
@@ -48,7 +56,9 @@ class Board:
         self.check_list(self.NE_diagonal_to_list(row, column))
         self.turn = not self.turn
 
-    def get_row(self,row): return self.board[row]
+    def get_row(self, row):
+        return self.board[row]
+
     def column_to_list(self, column):
         return [row[column] for row in self.board]
 
@@ -57,7 +67,7 @@ class Board:
         It returns a list of the values of the squares in the SE diagonal of the board, starting from the
         square at the intersection of the row and column passed to the function, and going up to 4
         squares in either direction
-        
+
         :param row: the row of the piece
         :param column: the column of the piece
         :return: A list of the values of the squares in the diagonal.
@@ -69,7 +79,10 @@ class Board:
         # range delimiter to avoid IndexError on generator
         start_limit = max(0, min(row, column) - 3)
         end_limit = min(8 - increment, min(row, column) + 4)
-        return [(self.board[i + row_increment][i + col_increment]) for i in range(start_limit, end_limit)]
+        return [
+            (self.board[i + row_increment][i + col_increment])
+            for i in range(start_limit, end_limit)
+        ]
 
     def NE_diagonal_to_list(self, row, column):  # ↗ NE Diagonal
         # Checking the diagonal from the bottom left to the top right.
@@ -83,24 +96,23 @@ class Board:
     def check_list(self, list):
         """
         It checks if the player has won
-        
+
         :param list: The list to check for a win
         """
         skin = self.player1 if self.turn else self.player2
         str_to_check = "".join(list)
         if skin * 4 in str_to_check:
             raise PlayerWonException("Player 1" if self.turn else "Player 2")
-    
+
     def __str__(self):
         # user friendly sudoku board
-        final_string = '+----'*8 + '+' + '\n'
+        final_string = "+----" * 8 + "+" + "\n"
         for i in self.board:
             for i in i:
-                final_string += f'| {i}'
-            final_string += '|' + '\n' + '+----'*8 + '+' + '\n'
+                final_string += f"| {i}"
+            final_string += "|" + "\n" + "+----" * 8 + "+" + "\n"
         return final_string
 
 
 if __name__ == "__main__":
     board = Board()
-    
