@@ -32,7 +32,6 @@ class Board:
     def available_spaces(self, column):
         # get the amount of spaces available
         column_list = self.column_to_list(column)
-        #return len([i for i in column_list if not i.isspace()])
         return len([i for i in column_list if i != "   "])
 
     def insert_token(self, column):
@@ -113,7 +112,3 @@ class Board:
                 final_string += f"| {i}"
             final_string += "|" + "\n" + "+----" * 8 + "+" + "\n"
         return final_string
-
-
-if __name__ == "__main__":
-    board = Board()

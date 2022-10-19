@@ -1,9 +1,6 @@
-import io
 import unittest
-from unittest.mock import call, patch
 
 from cuatro_en_linea import *
-from cuatro_en_linea_game import Terminal_game
 
 
 class Test_logic(unittest.TestCase):
