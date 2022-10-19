@@ -9,10 +9,6 @@ checks:
     enabled: true
     config:
       threshold: 3
-  similar-code:
-    enabled: true
-    config:
-      threshold: 7
   method-complexity:
     enabled: true
     config:
