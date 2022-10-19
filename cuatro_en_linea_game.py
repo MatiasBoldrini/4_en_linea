@@ -26,7 +26,7 @@ class Terminal_game():
             except ExitException:
                 break
                 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     terminal_game = Terminal_game()
     terminal_game.play()
         

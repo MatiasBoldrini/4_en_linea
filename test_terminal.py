@@ -101,5 +101,5 @@ class Test_frontend(unittest.TestCase):
         self.assertIn(board_str, fake_stdout.getvalue())
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     unittest.main()
