@@ -16,4 +16,10 @@ checks:
   method-complexity:
     enabled: true
     config:
-      threshold: 5
+      threshold: 10
+exclude_patterns:
+- "test_**"
+- "test_*"
+- "**/test/"
+- "**/tests/"
+- "Tests/"
