@@ -7,9 +7,10 @@ from cuatro_en_linea_game import Terminal_game
 
 
 class Test_frontend(unittest.TestCase):
-    def setUp(self):
-        self.board = Board()
-        self.game = Terminal_game()
+    pass
+    # def setUp(self):
+    #     self.board = Board()
+    #     self.game = Terminal_game()
 
     # @patch("builtins.input", side_effect=["0", "0", "1", "1", "2", "2", "3", "exit"])
     # def test_win(self, mock_inputs):
