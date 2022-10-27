@@ -1,2 +1,0 @@
-<a href="https://codeclimate.com/github/MatiasBoldrini/4_en_linea/maintainability"><img src="https://api.codeclimate.com/v1/badges/29c6e53ee151a5e6029c/maintainability" /></a>
-<a href="https://codeclimate.com/github/MatiasBoldrini/4_en_linea/test_coverage"><img src="https://api.codeclimate.com/v1/badges/29c6e53ee151a5e6029c/test_coverage" /></a>
